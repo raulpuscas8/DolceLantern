@@ -22,10 +22,13 @@ const SettingsBackground = styled.ImageBackground.attrs({
 
 const SettingsItem = styled(List.Item)`
   padding: ${(props) => props.theme.space[3]};
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(225, 225, 225, 0.9);
 `;
 const AvatarContainer = styled.View`
   align-items: center;
+`;
+const UserEmail = styled(Text)`
+  color: ${colors.text.white};
 `;
 
 export const SettingsScreen = ({ navigation }) => {
@@ -40,13 +43,13 @@ export const SettingsScreen = ({ navigation }) => {
             backgroundColor={colors.brand.primary}
           />
           <Spacer position="top" size="large">
-            <Text variant="label">{user.email}</Text>
+            <UserEmail variant="label">{user.email}</UserEmail>
           </Spacer>
         </AvatarContainer>
 
         <List.Section>
           <SettingsItem
-            title="Favourites"
+            title={<Text color={colors.ui.black}>Favourites</Text>}
             description="View your favourites"
             left={(props) => (
               <List.Icon {...props} color={colors.ui.error} icon="heart" />
@@ -55,29 +58,25 @@ export const SettingsScreen = ({ navigation }) => {
           />
           <Spacer />
           <SettingsItem
-            title="Payment"
+            title={<Text color={colors.ui.black}>Payment</Text>}
             left={(props) => (
-              <List.Icon {...props} color={colors.ui.secondary} icon="cart" />
+              <List.Icon {...props} color={colors.ui.black} icon="cart" />
             )}
             onPress={() => null}
           />
           <Spacer />
           <SettingsItem
-            title="Past Orders"
+            title={<Text color={colors.ui.black}>Past Orders</Text>}
             left={(props) => (
-              <List.Icon
-                {...props}
-                color={colors.ui.secondary}
-                icon="history"
-              />
+              <List.Icon {...props} color={colors.ui.black} icon="history" />
             )}
             onPress={() => null}
           />
           <Spacer />
           <SettingsItem
-            title="Logout"
+            title={<Text color={colors.ui.black}>Logout</Text>}
             left={(props) => (
-              <List.Icon {...props} color={colors.ui.secondary} icon="door" />
+              <List.Icon {...props} color={colors.ui.black} icon="door" />
             )}
             onPress={onLogout}
           />
