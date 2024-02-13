@@ -16,10 +16,17 @@ const Tab = createBottomTabNavigator();
 const TAB_ICON = {
   Restaurants: "restaurant",
   Map: "map",
-  Checkout: "cart",
   Settings: "settings",
 };
-
+const Settings = () => {
+  const { onLogout } = useContext(AuthenticationContext);
+  return (
+    <SafeArea>
+      <Text>Settings</Text>
+      <Button title="logout" onPress={() => onLogout()} />
+    </SafeArea>
+  );
+};
 const createScreenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name];
   return {
