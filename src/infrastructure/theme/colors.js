@@ -4,6 +4,7 @@ export const colors = {
     secondary: "#5282BD",
     muted: "#C6DAF7",
     orange: "#FFA500",
+    black: "#000000",
   },
   ui: {
     primary: "#262626",
@@ -25,5 +26,6 @@ export const colors = {
     inverse: "#FFFFFF",
     error: "#D0421B",
     success: "#138000",
+    white: "#FFFFFF",
   },
 };
