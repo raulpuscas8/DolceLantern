@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useCallback } from "react";
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
 import { List, Avatar } from "react-native-paper";
@@ -8,6 +9,8 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { colors } from "../../../infrastructure/theme/colors";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
 
 const TransparentSafeArea = styled(SafeArea)`
   background-color: transparent;
@@ -33,15 +36,34 @@ const UserEmail = styled(Text)`
 
 export const SettingsScreen = ({ navigation }) => {
   const { onLogout, user } = useContext(AuthenticationContext);
+  const [photo, setPhoto] = useState(null);
+
+  const getProfilePicture = async (currentUser) => {
+    const photoUri = await AsyncStorage.getItem(`${currentUser.uid}-photo`);
+    setPhoto(photoUri);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      getProfilePicture(user);
+    }, [user])
+  );
   return (
     <SettingsBackground>
       <TransparentSafeArea>
         <AvatarContainer>
-          <Avatar.Icon
-            size={180}
-            icon="human"
-            backgroundColor={colors.brand.primary}
-          />
+          <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+            {!photo && (
+              <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
+            )}
+            {photo && (
+              <Avatar.Image
+                size={180}
+                source={{ uri: photo }}
+                backgroundColor="#2182BD"
+              />
+            )}
+          </TouchableOpacity>
           <Spacer position="top" size="large">
             <UserEmail variant="label">{user.email}</UserEmail>
           </Spacer>

@@ -21,6 +21,7 @@
     "@types/styled-components-react-native": "^5.2.5",
     "camelize": "^1.0.1",
     "expo": "^50.0.6",
+    "expo-camera": "~14.0.4",
     "expo-font": "~11.10.2",
     "expo-status-bar": "~1.11.1",
     "expo-updates": "^0.24.9",
